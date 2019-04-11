@@ -1,7 +1,12 @@
 const request = require('supertest');
 const server = require('../api/server.js');
+const db = require('../database/dbConfig.js');
 
 describe('planets-router.js', () => {
+  beforeEach(async () => {
+    await db('planets').truncate();
+  });
+
   describe('GET /api/planets', () => {
     it('should respond with 200 OK', async () => {
       const res = await request(server).get('/api/planets');
@@ -14,7 +19,7 @@ describe('planets-router.js', () => {
     it('should respond with 201 created', () => {
       return request(server)
         .post('/api/planets')
-        .send({ name: 'Earth4', distance_from_sun: 93 })
+        .send({ name: 'Earth5', distance_from_sun: 93 })
         .then(res => {
           expect(res.status).toBe(201);
         });
