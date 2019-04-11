@@ -2,7 +2,8 @@ const db = require('../database/dbConfig.js');
 
 module.exports = {
   get,
-  add
+  add,
+  del
 };
 
 function get() {
@@ -14,4 +15,10 @@ async function add(planet) {
   return db('planets')
     .where({ id })
     .first();
+}
+
+async function del(id) {
+  return db('planets')
+    .where({ id })
+    .del();
 }

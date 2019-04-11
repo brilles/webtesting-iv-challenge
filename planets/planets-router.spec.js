@@ -14,7 +14,7 @@ describe('planets-router.js', () => {
     it('should respond with 201 created', () => {
       return request(server)
         .post('/api/planets')
-        .send({ name: 'Earth', distance_from_sun: 93 })
+        .send({ name: 'Earth4', distance_from_sun: 93 })
         .then(res => {
           expect(res.status).toBe(201);
         });
@@ -25,9 +25,29 @@ describe('planets-router.js', () => {
     it('should respond with json', () => {
       return request(server)
         .post('/api/planets')
-        .send({ name: 'Earth', distance_from_sun: 93 })
+        .send({ name: 'Earth2', distance_from_sun: 93 })
         .then(res => {
           expect(res.type).toBe('application/json');
+        });
+    });
+  });
+
+  describe('DELETE', () => {
+    it('should respond with 204 no content', () => {
+      return request(server)
+        .delete('/api/planets/2')
+        .then(res => {
+          expect(res.status).toBe(204);
+        });
+    });
+  });
+
+  describe('DELETE', () => {
+    it('should respond with count 1', () => {
+      return request(server)
+        .delete('/api/planets/2')
+        .then(res => {
+          expect(res.data).toBe(undefined);
         });
     });
   });

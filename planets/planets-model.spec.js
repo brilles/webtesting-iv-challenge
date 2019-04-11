@@ -13,12 +13,20 @@ describe('planets-model', () => {
     });
   });
 
-  describe('add()', () => {
-    it('should return JSON', async () => {
+  describe('add(planet)', () => {
+    it('should have length 2', async () => {
       await Planets.add({ name: 'Mars', distance_from_sun: 141 });
+      await Planets.add({ name: 'Earth2', distance_from_sun: 1 });
 
-      const planets = await db('planets');
-      expect(planets).toHaveLength(1);
+      const planet = await db('planets');
+      expect(planet).toHaveLength(2);
+    });
+  });
+
+  describe('del(id)', () => {
+    it('should return 1', async () => {
+      const count = await Planets.del(1);
+      expect(count);
     });
   });
 });
